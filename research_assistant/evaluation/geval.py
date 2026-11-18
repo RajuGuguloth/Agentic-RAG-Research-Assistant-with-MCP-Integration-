@@ -225,28 +225,50 @@ class GEvalJudge:
 
     def _parse_json_score(self, text: str) -> tuple[float, str]:
         """Extract reasoning and numeric score from JSON or fallback regex."""
-        text = text.strip()
-        match = re.search(r"\{.*\}", text, re.DOTALL)
+        cleaned = text.strip()
+
+        # Strip leading/trailing markdown fences
+        if cleaned.startswith("```"):
+            cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned, flags=re.IGNORECASE)
+            cleaned = re.sub(r"\s*```$", "", cleaned)
+            cleaned = cleaned.strip()
+
+        # 1. Attempt direct json.loads on cleaned text
+        try:
+            parsed = json.loads(cleaned)
+            if isinstance(parsed, dict) and "score" in parsed:
+                score = float(parsed["score"])
+                reasoning = str(parsed.get("reasoning", "")).strip()
+                return max(0.0, min(10.0, score)), reasoning
+        except (json.JSONDecodeError, ValueError):
+            pass
+
+        # 2. Attempt to parse first complete JSON block {...}
+        match = re.search(r"\{.*\}", cleaned, re.DOTALL)
         if match:
             try:
                 parsed = json.loads(match.group(0))
-                score = float(parsed.get("score", 0.0))
-                reasoning = str(parsed.get("reasoning", "")).strip()
-                clamped = max(0.0, min(10.0, score))
-                return clamped, reasoning
+                if isinstance(parsed, dict) and "score" in parsed:
+                    score = float(parsed["score"])
+                    reasoning = str(parsed.get("reasoning", "")).strip()
+                    return max(0.0, min(10.0, score)), reasoning
             except (json.JSONDecodeError, ValueError):
                 pass
 
-        score_match = re.search(
-            r"(?:score|final score|rating)\s*[:=]\s*(\d+(?:\.\d+)?)",
-            text,
-            re.IGNORECASE,
-        )
+        # 3. Regex fallback: if truncated at max_output_tokens, extract "score" key
+        score_match = re.search(r'"score"\s*:\s*(\d+(?:\.\d+)?)', text, re.IGNORECASE)
+        if not score_match:
+            score_match = re.search(
+                r"(?:score|final score|rating)\s*[:=]\s*(\d+(?:\.\d+)?)",
+                text,
+                re.IGNORECASE,
+            )
         if score_match:
             try:
                 score = float(score_match.group(1))
-                clamped = max(0.0, min(10.0, score))
-                return clamped, text
+                reasoning_match = re.search(r'"reasoning"\s*:\s*"((?:\\.|[^"\\])*)', text)
+                reasoning = reasoning_match.group(1).strip() if reasoning_match else text
+                return max(0.0, min(10.0, score)), reasoning
             except ValueError:
                 pass
 
@@ -282,7 +304,7 @@ class GEvalJudge:
                     system=system,
                     user=user,
                     temperature=0.0,
-                    max_tokens=1000,
+                    max_tokens=1024,
                 )
                 break
             except Exception as exc:

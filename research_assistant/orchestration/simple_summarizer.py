@@ -96,6 +96,11 @@ async def summarize_from_index(
     chain = prompt | llm
     response = await chain.ainvoke({"goal": goal, "context": context})
     report = response.content if hasattr(response, "content") else str(response)
+    if isinstance(report, list):
+        report = "\n".join(
+            part.get("text", str(part)) if isinstance(part, dict) else str(part)
+            for part in report
+        )
 
     sources = "\n".join(
         f"- {d.metadata.get('source', '?')} (page {d.metadata.get('page', '?')})"

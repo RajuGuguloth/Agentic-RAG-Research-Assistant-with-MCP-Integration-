@@ -7,7 +7,7 @@ import os
 from typing import Optional
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 def _strip_env(value: Optional[str]) -> Optional[str]:

@@ -95,6 +95,45 @@ class TestGEvalJudge(unittest.IsolatedAsyncioTestCase):
         score, reasoning = judge._parse_json_score(text)
         self.assertEqual(score, 8.0)
 
+    def test_parse_json_score_markdown_fences_and_truncation(self):
+        """Verify markdown-fenced and truncated JSON judge outputs parse the true score rather than defaulting to 5.0."""
+        judge = GEvalJudge(gateway=MagicMock())
+
+        # 1. Markdown-fenced JSON
+        fenced_json = (
+            "```json\n"
+            "{\n"
+            '  "reasoning": "The response is comprehensive and fully grounded in the provided paper.",\n'
+            '  "score": 9\n'
+            "}\n"
+            "```"
+        )
+        score, reasoning = judge._parse_json_score(fenced_json)
+        self.assertEqual(score, 9.0)
+        self.assertNotEqual(score, 5.0)
+        self.assertEqual(reasoning, "The response is comprehensive and fully grounded in the provided paper.")
+
+        # 2. Truncated JSON without closing brace, score at start
+        truncated_score_first = (
+            "```json\n"
+            "{\n"
+            '  "score": 8,\n'
+            '  "reasoning": "Step 1: The model identified self-attention mechanisms correctly. Step 2: Analysis was...'
+        )
+        score, _ = judge._parse_json_score(truncated_score_first)
+        self.assertEqual(score, 8.0)
+        self.assertNotEqual(score, 5.0)
+
+        # 3. Truncated JSON without closing brace, score at end
+        truncated_score_last = (
+            "{\n"
+            '  "reasoning": "Grounded answer with minor points omitted.",\n'
+            '  "score": 7'
+        )
+        score, _ = judge._parse_json_score(truncated_score_last)
+        self.assertEqual(score, 7.0)
+        self.assertNotEqual(score, 5.0)
+
     async def test_logprob_tokenization_normalization_and_expectation(self):
         """
         Verify logprob extraction normalizes tokens (' 10', '10', ' 8', '8')

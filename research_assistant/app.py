@@ -211,13 +211,19 @@ async def run_simple_summary_workflow(goal: str) -> Tuple[str, str, str, str]:
 
     try:
         result = await summarize_from_index(goal, llm, hybrid_retriever)
+        summary = result["report"]
+        if isinstance(summary, list):
+            summary = "\n".join(
+                part.get("text", str(part)) if isinstance(part, dict) else str(part)
+                for part in summary
+            )
         chart_html = (
             "<div style='padding: 12px; background: #f0fdf4; border-radius: 8px;'>"
             "Simple summary mode — no chart generated."
             "</div>"
         )
         return (
-            result["report"],
+            summary,
             chart_html,
             result["sub_queries"],
             result["findings"],
@@ -323,6 +329,11 @@ def build_index_and_summarize_documents(
 
     progress(1.0, desc="Generating summary...")
     report, chart, sub_queries, findings = launch_simple_summary()
+    if isinstance(report, list):
+        report = "\n".join(
+            part.get("text", str(part)) if isinstance(part, dict) else str(part)
+            for part in report
+        )
     return (
         f"✅ Index ready ({result['total_children']} chunks) using "
         f"**{CHUNKING_STRATEGIES[chunking_strategy]['label']}**. "

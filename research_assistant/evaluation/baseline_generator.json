@@ -1,42 +1,42 @@
 {
-  "run_id": "generator-isolated-1795003284",
-  "timestamp": "2026-11-18T12:01:24.943810+00:00",
+  "run_id": "generator-isolated-1795009694",
+  "timestamp": "2026-11-18T13:48:14.912150+00:00",
   "backend": "gemini",
   "total_samples": 4,
-  "successful_samples": 1,
-  "failed_samples": 3,
+  "successful_samples": 4,
+  "failed_samples": 0,
   "metrics": {
     "latency": {
-      "mean": 2.3298,
-      "std_dev": 0.0,
-      "min": 2.3298,
-      "max": 2.3298,
-      "p95": 2.3298,
-      "count": 1
+      "mean": 66.4994,
+      "std_dev": 36.4285,
+      "min": 17.1726,
+      "max": 115.0835,
+      "p95": 115.0835,
+      "count": 4
     },
     "tokens": {
-      "mean": 373.0,
-      "std_dev": 0.0,
-      "min": 373.0,
-      "max": 373.0,
-      "p95": 373.0,
-      "count": 1
+      "mean": 422.0,
+      "std_dev": 49.5227,
+      "min": 364.0,
+      "max": 491.0,
+      "p95": 491.0,
+      "count": 4
     },
     "correctness": {
-      "mean": 0.5,
+      "mean": 1.0,
       "std_dev": 0.0,
-      "min": 0.5,
-      "max": 0.5,
-      "p95": 0.5,
-      "count": 1
+      "min": 1.0,
+      "max": 1.0,
+      "p95": 1.0,
+      "count": 4
     },
     "completeness": {
-      "mean": 0.5,
+      "mean": 1.0,
       "std_dev": 0.0,
-      "min": 0.5,
-      "max": 0.5,
-      "p95": 0.5,
-      "count": 1
+      "min": 1.0,
+      "max": 1.0,
+      "p95": 1.0,
+      "count": 4
     },
     "tone": {
       "mean": 1.0,
@@ -44,15 +44,15 @@
       "min": 1.0,
       "max": 1.0,
       "p95": 1.0,
-      "count": 1
+      "count": 4
     },
     "geval_composite": {
-      "mean": 0.6,
+      "mean": 1.0,
       "std_dev": 0.0,
-      "min": 0.6,
-      "max": 0.6,
-      "p95": 0.6,
-      "count": 1
+      "min": 1.0,
+      "max": 1.0,
+      "p95": 1.0,
+      "count": 4
     }
   },
   "safety_violations": 0,
@@ -60,25 +60,25 @@
     {
       "sample_id": "q01",
       "query": "what is self-attention",
-      "generated_answer": "Self-attention, also known as intra-attention, is an attention mechanism that relates different positions of a single sequence to compute a representation of that sequence. It has been used in tasks like reading comprehension, abstractive summarization, and textual entailment. In self-attention, the keys, values, and queries all originate from the output of the previous layer in an encoder or decoder.",
+      "generated_answer": "Based on the provided document, self-attention (sometimes called intra-attention) is an attention mechanism that relates different positions of a\n single sequence in order to compute a representation of the sequence. In self-attention, all of the keys, values, and queries come from the same place, which is the output of the previous layer in the encoder or decoder.",
       "status": "success",
       "error_message": null,
-      "latency_seconds": 2.3298,
-      "token_count_estimate": 373,
+      "latency_seconds": 17.1726,
+      "token_count_estimate": 364,
       "geval_scores": {
         "correctness": {
           "dimension": "correctness",
-          "score": 0.5,
-          "raw_score": 5.0,
-          "reasoning": "```json\n{\n  \"reasoning\": \"The user asked for a definition of self-attention. I will evaluate the generated answer against the provided reference context and ground truth.\\n\\n1.  **Claim 1: Self-attention, also known as intra-attention.**\\n    *   Reference Context states: \\\"Self-attention, sometimes called intra-attention...\\\" - This claim is correct.\\n2.  **Claim 2: It is an attention mechanism that relates different positions of a single sequence to compute a representation of that sequence.**\\n    *   Reference Context states: \\\"",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "Step 1: Read the user query, reference context, ground truth, and generated answer. \nStep 2: Identify factual claims in the generated answer. The generated answer states that self-attention (intra-attention) relates different positions of a single sequence to compute a representation of the sequence, and that all keys, values, and queries come from the same place (the output of the previous layer in the encoder or decoder). \nStep 3: Cross-reference these claims with the reference context. The reference context explicitly states: 'Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence' and 'In self-attention, all of the keys, values and queries come from the same place, namely the output of the previous layer in the encoder or decoder.' \nStep 4: Check for contradictions or hallucinations. The generated answer is a direct, accurate synthesis of the provided reference text with no hallucinations or contradictions. \nStep 5: Assign a score of 10 for complete factual accuracy and alignment with the source text.",
           "logprobs": null,
           "is_logprob_weighted": false
         },
         "completeness": {
           "dimension": "completeness",
-          "score": 0.5,
-          "raw_score": 5.0,
-          "reasoning": "```json\n{\n  \"reasoning\": \"1. The user query asks for a definition of 'self-attention'. This requires explaining what it is, how it works at a high level, and potentially its applications or key characteristics.\\n2. The generated answer provides a definition: 'Self-attention, also known as intra-attention, is an attention mechanism that relates different positions of a single sequence to compute a representation of that sequence.' This aligns with both the reference context and ground truth.\\n3. It lists applications: 'It has been used in tasks like reading comprehension, abstractive summarization, and textual entailment.' This is directly from the reference context.\\n4. It explains the origin of keys, values, and queries: 'In self-attention, the keys, values, and queries all originate from the output of the previous layer in an encoder or decoder.' This is also from the reference context.\\n5. However, the ground truth reference adds a crucial detail: 'allowing the model to capture dependencies regardless of their distance in the input or output.' This fundamental advantage and characteristic of self-attention is omitted from the generated answer. While the reference context doesn't explicitly state this, the ground truth provides a more complete understanding.\\n6. The answer is very good and covers most aspects, but the omission of the ability to capture long-range dependencies is a significant detail for understanding the power and utility of self-attention. Therefore, it's not 'excellent' (",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The user query asks 'what is self-attention'. The generated answer extracts the core definition from the provided text, noting that it is an attention mechanism relating different positions of a single sequence to compute a representation, and explains that the keys, values, and queries all come from the same place (the output of the previous layer in the encoder or decoder). It covers all essential aspects and details present in the reference context accurately and completely.",
           "logprobs": null,
           "is_logprob_weighted": false
         },
@@ -86,7 +86,7 @@
           "dimension": "tone",
           "score": 1.0,
           "raw_score": 10.0,
-          "reasoning": "1. Assess the language used: The language is precise, technical, and objective. Terms like 'attention mechanism,' 'intra-attention,' 'encoder,' and 'decoder' are used correctly. There is no informal language. \n2. Check for excessive hedging, bias, emotional language, or overly conversational fluff: The response is direct, factual, and free of any hedging, bias, emotional language, or conversational elements. \n3. Check for clarity and structural readability: The answer is well-structured, concise, and easy to understand. Each sentence contributes directly to the definition. \n4. Assign a score: The tone is consistently professional, academic, and objective, aligning perfectly with the 'Excellent' criteria.",
+          "reasoning": "1. Language Check: The generated answer uses clear, objective, and professional language directly derived from the reference context. \n2. Bias/Emotion/Hedging: There is no emotional language, unnecessary hedging, or conversational fluff. It is direct and factual.\n3. Clarity/Readability: The answer is well-structured, easy to read, and accurately conveys the definition of self-attention as provided in the source text.\n4. Scoring: Since it meets all the criteria for an optimal tone—clarity, objectivity, professionalism, and conciseness—it deserves the highest score.",
           "logprobs": null,
           "is_logprob_weighted": false
         }
@@ -102,12 +102,37 @@
     {
       "sample_id": "q03",
       "query": "explain multi-head attention",
-      "generated_answer": null,
-      "status": "error",
-      "error_message": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\nPlease retry in 19h58m35.917510732s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://aistudio.google.com/docs/rate-limits\"\n}\n, violations {\n  description: \"Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\"\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 20\n}\n, retry_delay {\n  seconds: 71915\n}\n]",
-      "latency_seconds": 156.5601,
-      "token_count_estimate": 0,
-      "geval_scores": {},
+      "generated_answer": "Based on the provided document, multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this. \n\nIt works by using multiple parallel attention layers (or heads)—specifically, 8 in this work ($h = 8$). Each head performs attention on projected versions of the queries, keys, and values:\n\n$\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\dots, \\text{head}_h)W^O$ \n\nWhere each head is calculated as:\n$\\text{head}_i = \\text{Attention}(Q W_i^Q, K W_i^K, V W_i^V)$\n\nBecause the dimension of each head is reduced (with $d_k = d_v = d_{\\text{model}} / h = 64$), the total computational cost of multi-head attention is similar to that of single-head attention with full dimensionality.",
+      "status": "success",
+      "error_message": null,
+      "latency_seconds": 50.8343,
+      "token_count_estimate": 445,
+      "geval_scores": {
+        "correctness": {
+          "dimension": "correctness",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The generated answer explains multi-head attention by drawing directly from the provided reference context. It correctly states the purpose (attending to information from different representation subspaces at different positions, overcoming single-head averaging), provides the exact mathematical formulas for MultiHead attention and individual heads, mentions the specific parameters used in the work ($h = 8$, $d_k = d_v = 64$), and explains the computational cost aspect accurately. There are no factual contradictions, hallucinations, or missing key pieces from the text.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        },
+        "completeness": {
+          "dimension": "completeness",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The user query asks to explain multi-head attention. The generated answer includes all components from the reference context and ground truth reference: it explains what multi-head attention is (attending to different representation subspaces), why single-head attention falls short (averaging inhibits it), the mathematical formula (concatenation of heads multiplied by W^O, and how each head is computed with projections), the specific architecture details mentioned in the text (h = 8 parallel heads, reduced dimensions d_k = d_v = 64), and the computational cost efficiency. Every detail from the context is accurately and comprehensively captured.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        },
+        "tone": {
+          "dimension": "tone",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The generated answer is exceptionally clear, objective, and professional. It directly utilizes the provided context to explain multi-head attention without introducing unnecessary fluff, bias, or emotional language. The formatting (using LaTeX for equations) is clean and readable, and the explanation is concise yet thorough, matching the reference context well. It hits all criteria for a top-tier professional and objective tone.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        }
+      },
       "contextual_precision": null,
       "contextual_recall": null,
       "retrieved_contexts": [
@@ -119,12 +144,37 @@
     {
       "sample_id": "q04",
       "query": "scaled dot-product attention",
-      "generated_answer": null,
-      "status": "error",
-      "error_message": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\nPlease retry in 19h58m35.527025471s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://aistudio.google.com/docs/rate-limits\"\n}\n, violations {\n  description: \"Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\"\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 20\n}\n, retry_delay {\n  seconds: 71915\n}\n]",
-      "latency_seconds": 156.9992,
-      "token_count_estimate": 0,
-      "geval_scores": {},
+      "generated_answer": "Based on the provided document, \"Scaled Dot-Product Attention\" is a specific type of attention where the input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. \n\nHere is how it works:\n* **Calculation:** We compute the dot products of the query with all keys, divide each by $\\sqrt{d_k}$ (to counteract extremely small gradients that can happen when $d_k$ is large), and apply a softmax function to get the weights on the values.\n* **Matrix form:** When computed simultaneously with a set of queries packed into a matrix $Q$, along with keys ($K$) and values ($V$) packed into matrices, the formula for the matrix of outputs is: \n  $$\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$$",
+      "status": "success",
+      "error_message": null,
+      "latency_seconds": 82.9071,
+      "token_count_estimate": 491,
+      "geval_scores": {
+        "correctness": {
+          "dimension": "correctness",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The generated answer accurately reflects all key aspects of the reference context and ground truth. It correctly explains the dimensions of queries, keys, and values, the calculation process (dot products, scaling by 1/sqrt(d_k) to counteract small gradients in softmax for large d_k, and applying softmax), and provides the exact matrix formula Attention(Q, K, V) = softmax(Q K^T / sqrt(d_k)) V. There are no hallucinations, factual errors, or contradictions.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        },
+        "completeness": {
+          "dimension": "completeness",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The user query asks about 'scaled dot-product attention'. The reference context provides details on its definition, dimensions of queries/keys ($d_k$) and values ($d_v$), the step-by-step calculation, the matrix formulation $\\text{Attention}(Q, K, V) = \\text{softmax}(QK^T / \\sqrt{d_k})V$, and the reasoning behind the scaling factor ($1/\\sqrt{d_k}$) to counteract small gradients for large $d_k$. The generated answer successfully covers all these aspects: definition, dimensions, step-by-step description, the purpose of scaling, and the matrix formula. It is comprehensive, accurate, and completely aligned with the context.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        },
+        "tone": {
+          "dimension": "tone",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The generated answer is extremely clear, well-structured, professional, and objective. It accurately utilizes the provided context to explain scaled dot-product attention using appropriate formatting (bullet points, LaTeX math). There is no emotional language, excessive fluff, or bias. It adheres closely to the definition of a high-scoring tone.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        }
+      },
       "contextual_precision": null,
       "contextual_recall": null,
       "retrieved_contexts": [
@@ -137,12 +187,37 @@
     {
       "sample_id": "q05",
       "query": "positional encoding in transformer",
-      "generated_answer": null,
-      "status": "error",
-      "error_message": "429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\nPlease retry in 19h58m35.158554128s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://aistudio.google.com/docs/rate-limits\"\n}\n, violations {\n  description: \"Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\"\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 20\n}\n, retry_delay {\n  seconds: 71915\n}\n]",
-      "latency_seconds": 157.3151,
-      "token_count_estimate": 0,
-      "geval_scores": {},
+      "generated_answer": "Based on the provided document, because the model contains no recurrence and no convolution, positional encodings are added to the input embeddings at the bottoms of the encoder and decoder stacks to inject information about the relative or absolute position of the tokens in the sequence. \n\nTo do this, the model uses sine and cosine functions of different frequencies, calculated as:\n* $PE_{(pos, 2i)} = \\sin(pos / 10000^{2i / d_{model}})$\n* $PE_{(pos, 2i+1)} = \\cos(pos / 10000^{2i / d_{model}})$\n\nHere, *pos* represents the position and *i* represents the dimension.",
+      "status": "success",
+      "error_message": null,
+      "latency_seconds": 115.0835,
+      "token_count_estimate": 388,
+      "geval_scores": {
+        "correctness": {
+          "dimension": "correctness",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "The generated answer accurately captures the concept of positional encoding in transformers based on the reference context. It correctly explains why positional encodings are needed (absence of recurrence and convolution), where they are added (bottoms of encoder and decoder stacks), and what they achieve (injecting relative or absolute position information). It also accurately provides the exact mathematical formulas using sine and cosine functions with the correct variables as given in the context and ground truth. There are no contradictions or hallucinations.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        },
+        "completeness": {
+          "dimension": "completeness",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "1. Analyze the user query: The user asked about 'positional encoding in transformer'. \n2. Analyze the reference context and ground truth: The context explains *why* positional encoding is needed (absence of recurrence and convolution), *where* it is applied (added to input embeddings at the bottom of encoder/decoder stacks), *what* information it injects (relative or absolute position), and *how* it is calculated (using sine and cosine functions of different frequencies with specific formulas for even and odd dimensions, defining 'pos' and 'i').\n3. Evaluate the generated answer: The generated answer successfully includes the 'why' (no recurrence/convolution), the 'where' (bottoms of encoder and decoder stacks), the 'what' (relative or absolute position into input embeddings), and the exact mathematical formulas for sine and cosine functions along with the definitions of 'pos' and 'i'. \n4. Check completeness: All aspects of the reference context and ground truth are fully captured, well-formatted, and thoroughly explained.\n5. Score assignment: 10/10.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        },
+        "tone": {
+          "dimension": "tone",
+          "score": 1.0,
+          "raw_score": 10.0,
+          "reasoning": "1. **Language Check:** The language used in the generated answer is clear, highly objective, professional, and directly derived from the reference context. It maintains an academic and informative tone. \\n2. **Hedging/Bias/Fluff:** There is no emotional language, excessive hedging, or conversational fluff. It gets straight to the point while maintaining readability.\\n3. **Clarity and Structure:** The formatting (using bullet points and LaTeX formatting for the mathematical formulas) greatly enhances structural readability and clarity.\\n4. **Sc\noring:** The response meets all criteria for the 'TONE' dimension (clarity, objectivity, professionalism, conciseness). Therefore, it deserves the maximum score.",
+          "logprobs": null,
+          "is_logprob_weighted": false
+        }
+      },
       "contextual_precision": null,
       "contextual_recall": null,
       "retrieved_contexts": [
