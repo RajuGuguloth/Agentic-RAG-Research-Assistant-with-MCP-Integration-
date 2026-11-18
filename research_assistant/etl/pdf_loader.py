@@ -10,6 +10,10 @@ from langchain_core.documents import Document
 from pypdf import PdfReader
 
 
+class NoExtractablePDFTextError(ValueError):
+    """Raised when a PDF has no text layer to index."""
+
+
 def load_pdf(file_path: str, *, include_empty_pages: bool = False) -> List[Document]:
     """
     Extract text from a PDF file and return as a list of LangChain Documents,
@@ -69,7 +73,9 @@ def load_pdf(file_path: str, *, include_empty_pages: bool = False) -> List[Docum
         ))
 
     if not documents and not include_empty_pages:
-        raise ValueError(f"No extractable text found in {path.name}. It may be a scanned PDF.")
+        raise NoExtractablePDFTextError(
+            f"No extractable text found in {path.name}. It may be a scanned PDF."
+        )
 
     print(f"[pdf_loader] Loaded {len(documents)} pages from '{path.name}'")
     return documents

@@ -38,7 +38,7 @@ For each bullet: **what it claims → where it lives in code → the 20-second s
 ---
 
 ### RESUME LINE 2
-> *"Built a production-oriented RAG pipeline with hybrid retrieval (FAISS + BM25 + Reciprocal Rank Fusion + Cross-Encoder reranking) and parent–child PDF chunking for academic document question answering."*
+> *"Built a production-oriented RAG pipeline with local text extraction for PDF, HTML, TXT, DOCX, and PPTX, plus hybrid retrieval (FAISS + BM25 + Reciprocal Rank Fusion + Cross-Encoder reranking) and parent–child chunking for document question answering."*
 
 **Where it lives — every clause is real:**
 | Clause | Proof in code |
@@ -47,7 +47,8 @@ For each bullet: **what it claims → where it lives in code → the 20-second s
 | BM25 (sparse) | `sparse_retriever.py`, `TOP_K_SPARSE=20` (`config.py:45`) |
 | Reciprocal Rank Fusion | `hybrid_retriever.py:72-80`, `RRF_K=60` (`config.py:47`) |
 | Cross-Encoder rerank | `hybrid_retriever.py:116-130` (`BAAI/bge-reranker-large`), `TOP_K_FINAL=6` |
-| Parent–child chunking | `etl/chunker.py:45` (`parent_chunk_size=1500`), children link via `parent_id` UUID |
+| Local document parsing | `etl/document_loader.py` supports text-based PDF, HTML, TXT, DOCX, and PPTX; scanned PDFs need OCR, which is not configured |
+| Parent–child chunking | `etl/chunker.py` (`parent_chunk_size=1500`), children link via `parent_id` UUID |
 | Score filter (abstain) | `score_filter.py`, `MIN_RETRIEVAL_SCORE=0.35` (`config.py:48`) |
 
 **Spoken defense (30s):**
@@ -133,7 +134,7 @@ This is your **#1 repeated question**. It appears as:
 
 ### First: know YOUR code's honest reality (do not bluff)
 
-In `app.py → build_index_from_pdfs()` (line 46) the flow is:
+In `app.py → build_index_from_documents()` the flow is:
 `load PDFs → chunk → dense.build_index() → sparse.build_index() → save() to index_store/`.
 
 This is a **full rebuild that overwrites `index_store/`**. There is **no** incremental upsert, no per-document versioning, no timestamp/TTL, no delete API, no dedup. So:

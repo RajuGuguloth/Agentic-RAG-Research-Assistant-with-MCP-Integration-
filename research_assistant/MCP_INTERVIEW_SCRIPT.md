@@ -26,7 +26,7 @@ The 15-minute version of what you built and how to talk about it.
 - **`list_indexed_papers()`** — lets Claude discover what documents exist before searching them.
 - **`search_papers(query, top_k)`** — raw retrieval hits. Fast, no LLM. For when the caller wants evidence directly.
 - **`ask_paper(question)`** — full agentic answer with retrieve → judge → generate → verify → retry.
-- **`build_index_from_paths(pdf_paths)`** — ingestion. Chunk, embed, persist to disk.
+- **`build_index_from_paths(collection, file_paths)`** — replace one collection with indexed PDF, HTML, TXT, DOCX, or PPTX files.
 - **`deep_read_paper(paper_url_or_path)`** — extract a paper, analyze its sections, and return a structured report plus slides.
 
 The `resource://eval/latest_report` and `resource://papers/{source_id}` resources let a client inspect the latest evaluation JSON or load full text for a retrieved parent chunk.

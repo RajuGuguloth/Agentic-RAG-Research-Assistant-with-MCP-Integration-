@@ -52,7 +52,7 @@
 
 > *"I think about it in three layers — this is how I'd explain it in a production design review.*
 >
-> ***Layer 1 — Knowledge:*** PDF ingestion, parent-child chunking, metadata — source, page, parent_id — persisted to disk.*
+> ***Layer 1 — Knowledge:*** Local text extraction for PDF, HTML, TXT, DOCX, and PPTX; parent-child chunking; source and page metadata; persisted index.*
 >
 > ***Layer 2 — Retrieval:*** hybrid FAISS plus BM25, RRF fusion, CrossEncoder rerank, cosine thresholding. Not just 'we have a vector DB.'*
 >

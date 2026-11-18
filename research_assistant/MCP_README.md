@@ -10,9 +10,9 @@ loading a second FAISS index and embedding/reranker models in the MCP process.
 |---|---|
 | `index_status()` | Is the index ready? How many chunks? |
 | `list_indexed_papers()` | Which source documents are currently indexed |
-| `search_papers(query, top_k)` | Raw hybrid-retriever hits (fast, no LLM) |
+| `search_papers(collection, query, top_k)` | Raw hybrid-retriever hits from an existing collection (fast, no LLM) |
 | `ask_paper(question)` | Full agentic answer: retrieve → judge → generate → verify → retry |
-| `build_index_from_paths(pdf_paths)` | Ingest new PDFs, chunk, embed, persist |
+| `build_index_from_paths(collection, file_paths)` | Replace one collection with indexed PDF, HTML, TXT, DOCX, or PPTX files |
 | `deep_read_paper(paper_url_or_path)` | Analyze page text, handwriting, and visuals; generate a report and PowerPoint |
 
 The server also exposes these read-only resources:
@@ -145,14 +145,23 @@ Once wired, you can ask Claude (in Claude Code or Desktop):
 
 - "**Is my RAG index ready?**" → Claude calls `index_status()`.
 - "**What papers do I have indexed?**" → `list_indexed_papers()`.
-- "**Show me the top 3 chunks about self-attention.**" → `search_papers("self-attention", 3)`.
+- "**Show me the top 3 chunks about self-attention.**" → `search_papers("research-papers", "self-attention", 3)`.
 - "**What does the paper say about positional encoding?**" → `ask_paper("what does the paper say about positional encoding?")`.
-- "**Index this file: /home/user/paper.pdf**" → `build_index_from_paths(["/home/user/paper.pdf"])`; the MCP adapter uploads it to the API.
+- "**Index these files in research: /home/user/paper.pdf, /home/user/notes.docx**" → `build_index_from_paths("research", ["/home/user/paper.pdf", "/home/user/notes.docx"])`; the MCP adapter sends them to the local RAG API for local text extraction and replaces that collection.
+
+Text-based PDFs, HTML, TXT, DOCX, and PPTX are supported. Scanned/image-only
+PDFs are not supported because local OCR is not configured. Optional PDF
+page-image vision analysis is separate and may transmit images to its configured
+provider.
 - "**Deep-read this paper: /home/user/paper.pdf**" → `deep_read_paper("/home/user/paper.pdf")`.
 - "**Show me the full text of that retrieved chunk**" → open
   `resource://papers/{source_id}` using the `source_id` from a `search_papers` result.
 - "**Show the latest RAG evaluation results**" → read
   `resource://eval/latest_report`.
+
+Search requires a collection index that already exists. The current
+collection-aware contracts apply to search and upload. The `/v1/ingest`
+route remains a global-index operation until it is separately migrated.
 
 Claude picks which tool to call based on the wording. You don't have to name it.
 

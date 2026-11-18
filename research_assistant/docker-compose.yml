@@ -8,13 +8,19 @@ services:
     environment:
       RAG_API_KEY: ${RAG_API_KEY:?Set RAG_API_KEY in research_assistant/.env}
       RAG_INDEX_PATH: /data/index_store
+      RAG_INGEST_ROOT: /data/ingest
+      RAG_STATE_DIR: /data/state
     ports:
       - "127.0.0.1:7860:7860"
     volumes:
       - rag_index:/data/index_store
+      - rag_ingest:/data/ingest
+      - rag_state:/data/state
       - rag_artifacts:/app/artifacts
       - rag_logs:/app/logs
-      - hf_cache:/root/.cache/huggingface
+      - rag_memory:/app/memory
+      - hf_cache:/home/appuser/.cache/huggingface
+    restart: unless-stopped
     healthcheck:
       test:
         - CMD
@@ -28,6 +34,9 @@ services:
 
 volumes:
   rag_index:
+  rag_ingest:
+  rag_state:
   rag_artifacts:
   rag_logs:
+  rag_memory:
   hf_cache:

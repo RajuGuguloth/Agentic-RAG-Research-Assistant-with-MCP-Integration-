@@ -8,9 +8,10 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-RUNTIME_CONFIG_PATH = Path("./optimization/runtime_config.json")
-OPTIMIZATION_HISTORY_PATH = Path("./optimization/optimization_history.jsonl")
-PROMPT_HISTORY_PATH = Path("./optimization/prompt_history.jsonl")
+STATE_ROOT = Path(os.getenv("RAG_STATE_DIR", ".")).expanduser()
+RUNTIME_CONFIG_PATH = STATE_ROOT / "optimization" / "runtime_config.json"
+OPTIMIZATION_HISTORY_PATH = STATE_ROOT / "optimization" / "optimization_history.jsonl"
+PROMPT_HISTORY_PATH = STATE_ROOT / "optimization" / "prompt_history.jsonl"
 SELF_HEALING_LOG_PATH = Path("./logs/self_healing_log.jsonl")
 
 DEFAULT_RUNTIME_CONFIG: Dict[str, Any] = {

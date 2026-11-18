@@ -6,7 +6,7 @@
 
 ## 1. What is this project? (One sentence)
 
-You upload a **research PDF** (for example the Transformer paper), the system **reads and indexes** it, and then you can **ask questions**, **get summaries**, or **generate a structured report + slides** — with checks so answers are **grounded in the document**, not made up.
+You upload a research document, the system reads and indexes its text, and then you can ask questions or get summaries. It supports text-based PDF, HTML, TXT, DOCX, and PPTX; scanned/image-only PDFs are not supported because local OCR is not configured.
 
 Think of it as: **NotebookLM-style research assistant + evaluation dashboard**, built in Python.
 
@@ -16,7 +16,7 @@ Think of it as: **NotebookLM-style research assistant + evaluation dashboard**, 
 
 | Without this system | With this system |
 |---------------------|------------------|
-| ChatGPT answers from memory (may hallucinate) | Answers come from **your PDF text** |
+| ChatGPT answers from memory (may hallucinate) | Answers use **your indexed document text** |
 | Long PDFs are hard to search manually | **Hybrid search** finds the right sections |
 | No way to know if an answer is trustworthy | **Verification layer** grades relevance + groundedness |
 | No metrics on quality | **Evaluation pipeline** logs scores and pass rates |
@@ -32,7 +32,7 @@ Think of it as: **NotebookLM-style research assistant + evaluation dashboard**, 
 | **FastAPI** | REST API (e.g. feedback endpoint) | `app.py`, `api/` |
 | **Google Gemini** | Large language model (reads text, writes answers, judges quality) | `config.py`, `verification/` |
 | **LangChain** | Helper to call LLMs with prompts | `orchestration/` |
-| **PyMuPDF / pdfplumber** | Read PDF text, tables, images | `etl/` |
+| **pypdf, HTMLParser, python-docx, python-pptx** | Extract text locally from supported document formats | `etl/document_loader.py` |
 | **Sentence Transformers (MiniLM)** | Turn text into numbers (embeddings) for similarity search | `retrieval/dense_retriever.py` |
 | **FAISS** | Fast vector database (find similar embeddings) | `retrieval/dense_retriever.py` |
 | **BM25** | Keyword search (exact word matching) | `retrieval/sparse_retriever.py` |
@@ -89,13 +89,13 @@ flowchart TB
 
 | Tab | What you do | What happens inside |
 |-----|-------------|---------------------|
-| **📚 Data Sources** | Upload PDF → Build Index | PDF → chunks → FAISS + BM25 → saved to disk |
+| **📚 Data Sources** | Upload a supported document → Build Index | Local text extraction → chunks → FAISS + BM25 → saved to disk |
 | **💬 Chat with Documents** | Ask one question at a time | Retrieve → verify chunks → Gemini answer → verify answer |
 | **🔍 Research** | Summarize or run multi-query research | Retrieve + LLM (simple) OR planner + parallel agents (full) |
 | **📖 Deep-Read** | Paste arXiv/PDF URL | Extract figures/pages → 6 section summaries → report.md + slides.pptx |
 | **⚙️ Configuration** | View settings | Reads `.env` and `config.py` |
 
-**Start here every time:** Data Sources → upload PDF → Build Index → then use Chat or Research.
+**Start here every time:** Data Sources → upload a supported document → Build Index → then use Chat or Research.
 
 ---
 
@@ -127,7 +127,7 @@ PDF file
 
 **Example numbers (Transformer paper):** ~80 child vectors, parent chunks ~1500 chars each.
 
-**Files:** `etl/pdf_loader.py`, `etl/chunker.py`, `retrieval/*`, `app.py` → `build_index_from_pdfs()`
+**Files:** `etl/document_loader.py`, `etl/pdf_loader.py`, `etl/chunker.py`, `retrieval/*`, and `app.py` → `build_index_from_documents()`
 
 ---
 

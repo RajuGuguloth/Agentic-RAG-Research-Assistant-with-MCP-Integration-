@@ -3,72 +3,190 @@
     "id": "q01",
     "query": "what is self-attention",
     "ground_truth": "Self-attention is a mechanism where each position in a sequence attends to all positions in the same sequence to compute a representation of that position. It relates different positions of a single sequence in order to compute a representation of the sequence, allowing the model to capture dependencies regardless of their distance in the input or output.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence. Self-attention has been used successfully in a variety of tasks including reading comprehension, abstractive summarization, textual entailment and learning task-independent sentence representations.",
+      "An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. In self-attention, all of the keys, values and queries come from the same place, namely the output of the previous layer in the encoder or decoder."
+    ],
+    "expected_claims": [
+      "Self-attention relates different positions of a single sequence to compute a representation of that sequence.",
+      "In self-attention, queries, keys, and values are drawn from the same sequence representation.",
+      "Self-attention captures dependencies between sequence elements regardless of their distance."
+    ]
   },
   {
     "id": "q03",
     "query": "explain multi-head attention",
     "ground_truth": "Multi-head attention runs multiple attention heads in parallel, each attending to information from different representation subspaces at different positions. The Transformer uses 8 parallel attention layers (heads); the outputs are concatenated and once again projected, yielding the final values. This allows the model to jointly attend to information from different representation subspaces.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this. MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O where head_i = Attention(Q W_i^Q, K W_i^K, V W_i^V).",
+      "In this work we employ h = 8 parallel attention layers, or heads. For each of these we use d_k = d_v = d_model / h = 64. Due to the reduced dimension of each head, the total computational cost is similar to that of single-head attention with full dimensionality."
+    ],
+    "expected_claims": [
+      "Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.",
+      "The Transformer employs 8 parallel attention heads with projection matrices for queries, keys, and values.",
+      "The head outputs are concatenated and linearly projected with matrix W^O to produce the final values."
+    ]
   },
   {
     "id": "q04",
     "query": "scaled dot-product attention",
     "ground_truth": "Scaled Dot-Product Attention computes the dot products of the query with all keys, divides each by the square root of d_k (the dimension of the keys), and applies a softmax function to obtain the weights on the values. The scaling factor 1/sqrt(d_k) is introduced to counteract the effect of large dot-product magnitudes pushing the softmax into regions with extremely small gradients.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "We call our particular attention 'Scaled Dot-Product Attention'. The input consists of queries and keys of dimension d_k, and values of dimension d_v. We compute the dot products of the query with all keys, divide each by sqrt(d_k), and apply a softmax function to obtain the weights on the values.",
+      "In practice, we compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed together into matrices K and V. We compute the matrix of outputs as: Attention(Q, K, V) = softmax(Q K^T / sqrt(d_k)) V.",
+      "We suspect that for large values of d_k, the dot products grow large in magnitude, pushing the softmax function into regions that have extremely small gradients. To counteract this effect, we scale the dot products by 1 / sqrt(d_k)."
+    ],
+    "expected_claims": [
+      "Scaled Dot-Product Attention formula is Attention(Q, K, V) = softmax(Q K^T / sqrt(d_k)) V.",
+      "The dot products are divided by the square root of key dimension d_k.",
+      "The scaling factor counteracts large dot products pushing the softmax into vanishing gradient regions."
+    ]
   },
   {
     "id": "q05",
     "query": "positional encoding in transformer",
     "ground_truth": "Since the Transformer contains no recurrence or convolution, positional encodings are added to the input embeddings to inject information about the relative or absolute position of tokens in the sequence. The paper uses sine and cosine functions of different frequencies: PE(pos, 2i) = sin(pos/10000^(2i/d_model)) and PE(pos, 2i+1) = cos(pos/10000^(2i/d_model)).",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add 'positional encodings' to the input embeddings at the bottoms of the encoder and decoder stacks.",
+      "In this work, we use sine and cosine functions of different frequencies: PE_(pos, 2i) = sin(pos / 10000^(2i / d_model)) and PE_(pos, 2i+1) = cos(pos / 10000^(2i / d_model)), where pos is the position and i is the dimension."
+    ],
+    "expected_claims": [
+      "Positional encodings inject token sequence order because the Transformer has no recurrence or convolution.",
+      "Positional encodings are added to the input embeddings at the bottom of the encoder and decoder stacks.",
+      "The positional encoding uses sine and cosine functions across different frequencies based on dimension and position."
+    ]
   },
   {
     "id": "q06",
     "query": "encoder decoder architecture",
     "ground_truth": "The Transformer follows an encoder-decoder architecture using stacked self-attention and point-wise fully connected layers for both encoder and decoder. The encoder maps an input sequence to a sequence of continuous representations, and the decoder generates an output sequence one element at a time, auto-regressively consuming previously generated symbols.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "Most competitive neural sequence transduction models have an encoder-decoder structure. Here, the encoder maps an input sequence of symbol representations (x_1, ..., x_n) to a sequence of continuous representations z = (z_1, ..., z_n). Given z, the decoder then generates an output sequence (y_1, ..., y_m) of symbols one element at a time.",
+      "At each step the model is auto-regressive, consuming the previously generated symbols as additional input when generating the next. The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder."
+    ],
+    "expected_claims": [
+      "The encoder maps symbol representations to continuous representations.",
+      "The decoder auto-regressively generates symbols one element at a time using previous symbols.",
+      "Both the encoder and decoder use stacks of self-attention and point-wise fully connected layers."
+    ]
   },
   {
     "id": "q08",
     "query": "attention is all you need main contribution",
     "ground_truth": "The main contribution is proposing the Transformer, a new simple network architecture based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. This enables significantly more parallelization and reaches new state-of-the-art results on machine translation tasks while requiring less time to train.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "In this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.",
+      "The Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution."
+    ],
+    "expected_claims": [
+      "The paper proposes the Transformer architecture based entirely on attention mechanisms.",
+      "The Transformer eliminates recurrence and convolution from sequence transduction.",
+      "The model enables greater parallelization and reaches state-of-the-art translation quality with faster training."
+    ]
   },
   {
     "id": "q09",
     "query": "BLEU score translation results",
     "ground_truth": "The Transformer achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results (including ensembles) by over 2 BLEU. On the WMT 2014 English-to-French translation task the model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2.0 BLEU, establishing a new state-of-the-art BLEU score of 28.4.",
+      "On the WMT 2014 English-to-French translation task, our big model achieves a BLEU score of 41.0, outperforming all of the previously published single models and ensembles, at less than 1/4 the training cost of the previous state-of-the-art model. The Transformer (big) model trained for 3.5 days reached 41.8 BLEU."
+    ],
+    "expected_claims": [
+      "The Transformer (big) achieves 28.4 BLEU on WMT 2014 English-to-German translation.",
+      "The English-to-German score outperforms prior models including ensembles by over 2.0 BLEU.",
+      "On WMT 2014 English-to-French, the model achieves a state-of-the-art BLEU score of 41.8."
+    ]
   },
   {
     "id": "q10",
     "query": "WMT 2014 English German translation",
     "ground_truth": "On the WMT 2014 English-to-German translation task, the big Transformer model outperforms the best previously reported models (including ensembles) by more than 2.0 BLEU, establishing a new state-of-the-art BLEU score of 28.4.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2.0 BLEU, establishing a new state-of-the-art BLEU score of 28.4. Even our base model exceeds all previously published models and ensembles, at a fraction of the training cost."
+    ],
+    "expected_claims": [
+      "The big Transformer reaches a state-of-the-art 28.4 BLEU on WMT 2014 English-to-German.",
+      "It outperforms previously reported models and ensembles by more than 2.0 BLEU."
+    ]
   },
   {
     "id": "q14",
     "query": "computational complexity of self attention",
     "ground_truth": "A self-attention layer has O(1) sequential operations and connects all positions with a constant number of sequentially executed operations. Its per-layer complexity is O(n^2 * d) where n is the sequence length and d is the representation dimension, which is faster than a recurrent layer when n is smaller than d.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "As noted in Table 1, a self-attention layer connects all positions with a constant number of sequentially executed operations, whereas a recurrent layer requires O(n) sequential operations. In terms of computational complexity, self-attention layers are faster than recurrent layers when the sequence length n is smaller than the representation dimensionality d, which is most often the case with sentence representations.",
+      "Per-layer complexity for self-attention is O(n^2 * d), sequential operations is O(1), and maximum path length is O(1)."
+    ],
+    "expected_claims": [
+      "Self-attention per-layer computational complexity is O(n^2 * d).",
+      "Self-attention requires O(1) sequential operations.",
+      "Self-attention connects all positions with a maximum path length of O(1)."
+    ]
   },
   {
     "id": "q15",
     "query": "parallelization advantage over recurrent models",
     "ground_truth": "Recurrent models generate a sequence of hidden states as a function of the previous hidden state and the current position, precluding parallelization within training examples. The Transformer eschews recurrence and relies entirely on attention to draw global dependencies, allowing significantly more parallelization and reaching new state-of-the-art quality after being trained for as little as twelve hours on eight P100 GPUs.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "Recurrent models typically factor computation along the symbol positions of the input and output sequences. Aligning the positions to steps in computation time, they generate a sequence of hidden states h_t, as a function of the previous hidden state h_{t-1} and the input for position t. This inherently sequential nature precludes parallelization within training examples, which becomes critical at longer sequence lengths.",
+      "The Transformer model architecture eschews recurrence and instead relies entirely on an attention mechanism to draw global dependencies between input and output. The Transformer allows for significantly more parallelization."
+    ],
+    "expected_claims": [
+      "Recurrent models generate sequential hidden states h_t from h_{t-1}, preventing parallelization within training examples.",
+      "The Transformer eschews sequential recurrence in favor of attention mechanisms.",
+      "Eliminating recurrence enables extensive parallelization during training."
+    ]
   },
   {
     "id": "q16",
     "query": "how many encoder layers",
     "ground_truth": "The encoder is composed of a stack of N=6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. Residual connections and layer normalization are applied around each sub-layer.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "The encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization."
+    ],
+    "expected_claims": [
+      "The encoder consists of a stack of N = 6 identical layers.",
+      "Each encoder layer contains two sub-layers: multi-head self-attention and position-wise feed-forward network.",
+      "Residual connections and layer normalization are applied around each sub-layer."
+    ]
   },
   {
     "id": "q17",
     "query": "position-wise feed-forward network",
     "ground_truth": "In addition to attention sub-layers, each layer contains a fully connected feed-forward network applied to each position separately and identically. It consists of two linear transformations with a ReLU activation in between: FFN(x) = max(0, xW1 + b1)W2 + b2. The inner-layer has dimensionality d_ff = 2048.",
-    "category": "in_domain"
+    "category": "in_domain",
+    "expect_retrieval": true,
+    "golden_context": [
+      "In addition to attention sub-layers, each of the layers in our encoder and decoder contains a fully connected feed-forward network, which is applied to each position separately and identically. This consists of two linear transformations with a ReLU activation in between: FFN(x) = max(0, x W_1 + b_1) W_2 + b_2.",
+      "While the linear transformations are the same across different positions, they use different parameters from layer to layer. Another way of describing this is as two convolutions with kernel size 1. The dimensionality of input and output is d_model = 512, and the inner-layer has dimensionality d_ff = 2048."
+    ],
+    "expected_claims": [
+      "The feed-forward network is applied to each position separately and identically.",
+      "The FFN formula is FFN(x) = max(0, xW1 + b1)W2 + b2 using a ReLU activation.",
+      "The inner-layer dimensionality is d_ff = 2048 while input/output dimensionality is d_model = 512."
+    ]
   }
 ]

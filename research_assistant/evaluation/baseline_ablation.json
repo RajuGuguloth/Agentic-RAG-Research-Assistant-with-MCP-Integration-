@@ -1,0 +1,450 @@
+{
+  "1_dense_faiss_only": {
+    "contextual_precision_mean": 0.0,
+    "contextual_precision_p95": 0.0,
+    "contextual_recall_mean": 0.0,
+    "contextual_recall_p95": 0.0,
+    "abstention_accuracy": 1.0,
+    "report": {
+      "run_id": "retriever-eval",
+      "timestamp": "2026-11-18T12:06:18.833689+00:00",
+      "backend": "gemini",
+      "total_samples": 4,
+      "successful_samples": 4,
+      "failed_samples": 0,
+      "metrics": {
+        "contextual_precision": {
+          "mean": 0.0,
+          "std_dev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "p95": 0.0,
+          "count": 4
+        },
+        "contextual_recall": {
+          "mean": 0.0,
+          "std_dev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "p95": 0.0,
+          "count": 4
+        },
+        "abstention_accuracy": {
+          "mean": 1.0,
+          "std_dev": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "p95": 1.0,
+          "count": 1
+        }
+      },
+      "safety_violations": 0,
+      "sample_results": [
+        {
+          "sample_id": "q01",
+          "query": "what is self-attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q03",
+          "query": "explain multi-head attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q04",
+          "query": "scaled dot-product attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q05",
+          "query": "positional encoding in transformer",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        }
+      ],
+      "metadata": {
+        "top_k": 5,
+        "in_domain_count": 4,
+        "off_topic_count": 0,
+        "abstained_count": 0
+      }
+    }
+  },
+  "2_bm25_sparse_only": {
+    "contextual_precision_mean": 0.25,
+    "contextual_precision_p95": 1.0,
+    "contextual_recall_mean": 0.0,
+    "contextual_recall_p95": 0.0,
+    "abstention_accuracy": 1.0,
+    "report": {
+      "run_id": "retriever-eval",
+      "timestamp": "2026-11-18T12:06:18.834495+00:00",
+      "backend": "gemini",
+      "total_samples": 4,
+      "successful_samples": 4,
+      "failed_samples": 0,
+      "metrics": {
+        "contextual_precision": {
+          "mean": 0.25,
+          "std_dev": 0.433,
+          "min": 0.0,
+          "max": 1.0,
+          "p95": 1.0,
+          "count": 4
+        },
+        "contextual_recall": {
+          "mean": 0.0,
+          "std_dev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "p95": 0.0,
+          "count": 4
+        },
+        "abstention_accuracy": {
+          "mean": 1.0,
+          "std_dev": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "p95": 1.0,
+          "count": 1
+        }
+      },
+      "safety_violations": 0,
+      "sample_results": [
+        {
+          "sample_id": "q01",
+          "query": "what is self-attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 1.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [
+            "Our people make all the difference in our success.\nJob Description\nThe Spec Analytics Analyst is a trainee professional role. Requires a good knowledge of the range of processes, procedures and systems to be used in carrying out assigned tasks and a basic understanding of the underlying concepts and principles upon which the job is based. Good understanding of how the team interacts with others in accomplishing the objectives of the area. Makes evaluative judgements based on the analysis of factual information. They are expected to resolve problems by identifying and selecting solutions through the application of acquired technical experience and will be guided by precedents. Must be able to exchange information in a concise way as well as be sensitive to audience diversity. Limited but direct impact on the business through the quality of the tasks/services provided. Impact of the job holder is restricted to own job.\nWhat\u2019s expected from you?\nAs an Analyst, we are seeking an experienced analytics candidate who should be able to perform below behaviors in their day-to-day role: \u00a0\nData Manipulation: Incumbents work with large and complex data sets (both internal and external data) to evaluate, recommend, and support the implementation of business strategies\nFamiliarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes",
+            "About CITI\nCiti's mission is to serve as a trusted partner to our clients by responsibly providing financial services that enable growth and economic progress. We have 200+ years of experience helping our clients meet the world's toughest challenges and embrace its greatest opportunities.\nAbout AIM: \nAnalytics and Information Management(AIM) is a global community that is driving data driven transformation across Citi in multiple functions with the objective to create actionable intelligence for our business leaders. We are a fast growing organization working with Citi businesses and functions across the world. \nExcited to grow your career?\nWe value our talented employees, and whenever possible strive to help one of our associates grow professionally before recruiting new talent to our open positions. If you think the open position you see is right for you, we encourage you to apply!\nOur people make all the difference in our success.\nJob Description"
+          ],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q03",
+          "query": "explain multi-head attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q04",
+          "query": "scaled dot-product attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q05",
+          "query": "positional encoding in transformer",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [
+            "Our people make all the difference in our success.\nJob Description\nThe Spec Analytics Analyst is a trainee professional role. Requires a good knowledge of the range of processes, procedures and systems to be used in carrying out assigned tasks and a basic understanding of the underlying concepts and principles upon which the job is based. Good understanding of how the team interacts with others in accomplishing the objectives of the area. Makes evaluative judgements based on the analysis of factual information. They are expected to resolve problems by identifying and selecting solutions through the application of acquired technical experience and will be guided by precedents. Must be able to exchange information in a concise way as well as be sensitive to audience diversity. Limited but direct impact on the business through the quality of the tasks/services provided. Impact of the job holder is restricted to own job.\nWhat\u2019s expected from you?\nAs an Analyst, we are seeking an experienced analytics candidate who should be able to perform below behaviors in their day-to-day role: \u00a0\nData Manipulation: Incumbents work with large and complex data sets (both internal and external data) to evaluate, recommend, and support the implementation of business strategies\nFamiliarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes",
+            "Qualifications:\nPrevious related experience preferred\nHave the ability to retrieve and manipulation data\nWorking experience in a quantitative field\nPossess analytic ability and problem solving skills\nExcellent communication and interpersonal skills, be organized, detail oriented, and adaptive to matrix work environment\n\nEducation:\nMasters /University degree or equivalent experience",
+            "About CITI\nCiti's mission is to serve as a trusted partner to our clients by responsibly providing financial services that enable growth and economic progress. We have 200+ years of experience helping our clients meet the world's toughest challenges and embrace its greatest opportunities.\nAbout AIM: \nAnalytics and Information Management(AIM) is a global community that is driving data driven transformation across Citi in multiple functions with the objective to create actionable intelligence for our business leaders. We are a fast growing organization working with Citi businesses and functions across the world. \nExcited to grow your career?\nWe value our talented employees, and whenever possible strive to help one of our associates grow professionally before recruiting new talent to our open positions. If you think the open position you see is right for you, we encourage you to apply!\nOur people make all the difference in our success.\nJob Description",
+            "Familiarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes\nStatistical mind set \u2013 Familiarity in basic statistics, hypothesis testing, segmentation, and predictive modeling.\nStakeholder Management: Manage stakeholders across various functions and regions.\u00a0\u00a0\nPresentation & Visualization: Knowledge of data visualization techniques to design effective presentations\nTeamwork: Effectively contribute and add value to cross functional initiatives. Seek to learn from other areas within the site to improve analytic approaches for the team.\nCompliance: Appropriately assess risk when business decisions are made, demonstrating consideration for the firm's reputation and safeguarding Citigroup, its clients, and assets, by driving compliance with applicable laws, rules and regulations, adhering to Policy, applying sound ethical judgment regarding personal behavior, conduct and business practices, and escalating, managing and reporting control issues with transparency.\nAnalytical Skills : Must Have\nBasic Statistics and Probability\nGood Logical / Analytical / Quantitative /Reasoning"
+          ],
+          "metadata": {}
+        }
+      ],
+      "metadata": {
+        "top_k": 5,
+        "in_domain_count": 4,
+        "off_topic_count": 0,
+        "abstained_count": 0
+      }
+    }
+  },
+  "3_hybrid_rrf_no_reranker": {
+    "contextual_precision_mean": 0.25,
+    "contextual_precision_p95": 1.0,
+    "contextual_recall_mean": 0.0,
+    "contextual_recall_p95": 0.0,
+    "abstention_accuracy": 1.0,
+    "report": {
+      "run_id": "retriever-eval",
+      "timestamp": "2026-11-18T12:06:18.850351+00:00",
+      "backend": "gemini",
+      "total_samples": 4,
+      "successful_samples": 4,
+      "failed_samples": 0,
+      "metrics": {
+        "contextual_precision": {
+          "mean": 0.25,
+          "std_dev": 0.433,
+          "min": 0.0,
+          "max": 1.0,
+          "p95": 1.0,
+          "count": 4
+        },
+        "contextual_recall": {
+          "mean": 0.0,
+          "std_dev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "p95": 0.0,
+          "count": 4
+        },
+        "abstention_accuracy": {
+          "mean": 1.0,
+          "std_dev": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "p95": 1.0,
+          "count": 1
+        }
+      },
+      "safety_violations": 0,
+      "sample_results": [
+        {
+          "sample_id": "q01",
+          "query": "what is self-attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 1.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [
+            "Our people make all the difference in our success.\nJob Description\nThe Spec Analytics Analyst is a trainee professional role. Requires a good knowledge of the range of processes, procedures and systems to be used in carrying out assigned tasks and a basic understanding of the underlying concepts and principles upon which the job is based. Good understanding of how the team interacts with others in accomplishing the objectives of the area. Makes evaluative judgements based on the analysis of factual information. They are expected to resolve problems by identifying and selecting solutions through the application of acquired technical experience and will be guided by precedents. Must be able to exchange information in a concise way as well as be sensitive to audience diversity. Limited but direct impact on the business through the quality of the tasks/services provided. Impact of the job holder is restricted to own job.\nWhat\u2019s expected from you?\nAs an Analyst, we are seeking an experienced analytics candidate who should be able to perform below behaviors in their day-to-day role: \u00a0\nData Manipulation: Incumbents work with large and complex data sets (both internal and external data) to evaluate, recommend, and support the implementation of business strategies\nFamiliarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes",
+            "About CITI\nCiti's mission is to serve as a trusted partner to our clients by responsibly providing financial services that enable growth and economic progress. We have 200+ years of experience helping our clients meet the world's toughest challenges and embrace its greatest opportunities.\nAbout AIM: \nAnalytics and Information Management(AIM) is a global community that is driving data driven transformation across Citi in multiple functions with the objective to create actionable intelligence for our business leaders. We are a fast growing organization working with Citi businesses and functions across the world. \nExcited to grow your career?\nWe value our talented employees, and whenever possible strive to help one of our associates grow professionally before recruiting new talent to our open positions. If you think the open position you see is right for you, we encourage you to apply!\nOur people make all the difference in our success.\nJob Description"
+          ],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q03",
+          "query": "explain multi-head attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q04",
+          "query": "scaled dot-product attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q05",
+          "query": "positional encoding in transformer",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [
+            "Our people make all the difference in our success.\nJob Description\nThe Spec Analytics Analyst is a trainee professional role. Requires a good knowledge of the range of processes, procedures and systems to be used in carrying out assigned tasks and a basic understanding of the underlying concepts and principles upon which the job is based. Good understanding of how the team interacts with others in accomplishing the objectives of the area. Makes evaluative judgements based on the analysis of factual information. They are expected to resolve problems by identifying and selecting solutions through the application of acquired technical experience and will be guided by precedents. Must be able to exchange information in a concise way as well as be sensitive to audience diversity. Limited but direct impact on the business through the quality of the tasks/services provided. Impact of the job holder is restricted to own job.\nWhat\u2019s expected from you?\nAs an Analyst, we are seeking an experienced analytics candidate who should be able to perform below behaviors in their day-to-day role: \u00a0\nData Manipulation: Incumbents work with large and complex data sets (both internal and external data) to evaluate, recommend, and support the implementation of business strategies\nFamiliarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes",
+            "Qualifications:\nPrevious related experience preferred\nHave the ability to retrieve and manipulation data\nWorking experience in a quantitative field\nPossess analytic ability and problem solving skills\nExcellent communication and interpersonal skills, be organized, detail oriented, and adaptive to matrix work environment\n\nEducation:\nMasters /University degree or equivalent experience",
+            "About CITI\nCiti's mission is to serve as a trusted partner to our clients by responsibly providing financial services that enable growth and economic progress. We have 200+ years of experience helping our clients meet the world's toughest challenges and embrace its greatest opportunities.\nAbout AIM: \nAnalytics and Information Management(AIM) is a global community that is driving data driven transformation across Citi in multiple functions with the objective to create actionable intelligence for our business leaders. We are a fast growing organization working with Citi businesses and functions across the world. \nExcited to grow your career?\nWe value our talented employees, and whenever possible strive to help one of our associates grow professionally before recruiting new talent to our open positions. If you think the open position you see is right for you, we encourage you to apply!\nOur people make all the difference in our success.\nJob Description",
+            "Familiarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes\nStatistical mind set \u2013 Familiarity in basic statistics, hypothesis testing, segmentation, and predictive modeling.\nStakeholder Management: Manage stakeholders across various functions and regions.\u00a0\u00a0\nPresentation & Visualization: Knowledge of data visualization techniques to design effective presentations\nTeamwork: Effectively contribute and add value to cross functional initiatives. Seek to learn from other areas within the site to improve analytic approaches for the team.\nCompliance: Appropriately assess risk when business decisions are made, demonstrating consideration for the firm's reputation and safeguarding Citigroup, its clients, and assets, by driving compliance with applicable laws, rules and regulations, adhering to Policy, applying sound ethical judgment regarding personal behavior, conduct and business practices, and escalating, managing and reporting control issues with transparency.\nAnalytical Skills : Must Have\nBasic Statistics and Probability\nGood Logical / Analytical / Quantitative /Reasoning"
+          ],
+          "metadata": {}
+        }
+      ],
+      "metadata": {
+        "top_k": 5,
+        "in_domain_count": 4,
+        "off_topic_count": 0,
+        "abstained_count": 0
+      }
+    }
+  },
+  "4_hybrid_rrf_with_reranker": {
+    "contextual_precision_mean": 0.25,
+    "contextual_precision_p95": 1.0,
+    "contextual_recall_mean": 0.0,
+    "contextual_recall_p95": 0.0,
+    "abstention_accuracy": 1.0,
+    "report": {
+      "run_id": "retriever-eval",
+      "timestamp": "2026-11-18T12:06:32.031940+00:00",
+      "backend": "gemini",
+      "total_samples": 4,
+      "successful_samples": 4,
+      "failed_samples": 0,
+      "metrics": {
+        "contextual_precision": {
+          "mean": 0.25,
+          "std_dev": 0.433,
+          "min": 0.0,
+          "max": 1.0,
+          "p95": 1.0,
+          "count": 4
+        },
+        "contextual_recall": {
+          "mean": 0.0,
+          "std_dev": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "p95": 0.0,
+          "count": 4
+        },
+        "abstention_accuracy": {
+          "mean": 1.0,
+          "std_dev": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "p95": 1.0,
+          "count": 1
+        }
+      },
+      "safety_violations": 0,
+      "sample_results": [
+        {
+          "sample_id": "q01",
+          "query": "what is self-attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 1.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [
+            "Our people make all the difference in our success.\nJob Description\nThe Spec Analytics Analyst is a trainee professional role. Requires a good knowledge of the range of processes, procedures and systems to be used in carrying out assigned tasks and a basic understanding of the underlying concepts and principles upon which the job is based. Good understanding of how the team interacts with others in accomplishing the objectives of the area. Makes evaluative judgements based on the analysis of factual information. They are expected to resolve problems by identifying and selecting solutions through the application of acquired technical experience and will be guided by precedents. Must be able to exchange information in a concise way as well as be sensitive to audience diversity. Limited but direct impact on the business through the quality of the tasks/services provided. Impact of the job holder is restricted to own job.\nWhat\u2019s expected from you?\nAs an Analyst, we are seeking an experienced analytics candidate who should be able to perform below behaviors in their day-to-day role: \u00a0\nData Manipulation: Incumbents work with large and complex data sets (both internal and external data) to evaluate, recommend, and support the implementation of business strategies\nFamiliarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes",
+            "About CITI\nCiti's mission is to serve as a trusted partner to our clients by responsibly providing financial services that enable growth and economic progress. We have 200+ years of experience helping our clients meet the world's toughest challenges and embrace its greatest opportunities.\nAbout AIM: \nAnalytics and Information Management(AIM) is a global community that is driving data driven transformation across Citi in multiple functions with the objective to create actionable intelligence for our business leaders. We are a fast growing organization working with Citi businesses and functions across the world. \nExcited to grow your career?\nWe value our talented employees, and whenever possible strive to help one of our associates grow professionally before recruiting new talent to our open positions. If you think the open position you see is right for you, we encourage you to apply!\nOur people make all the difference in our success.\nJob Description"
+          ],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q03",
+          "query": "explain multi-head attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q04",
+          "query": "scaled dot-product attention",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [],
+          "metadata": {}
+        },
+        {
+          "sample_id": "q05",
+          "query": "positional encoding in transformer",
+          "generated_answer": null,
+          "status": "success",
+          "error_message": null,
+          "latency_seconds": null,
+          "token_count_estimate": null,
+          "geval_scores": {},
+          "contextual_precision": 0.0,
+          "contextual_recall": 0.0,
+          "retrieved_contexts": [
+            "Familiarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes\nStatistical mind set \u2013 Familiarity in basic statistics, hypothesis testing, segmentation, and predictive modeling.\nStakeholder Management: Manage stakeholders across various functions and regions.\u00a0\u00a0\nPresentation & Visualization: Knowledge of data visualization techniques to design effective presentations\nTeamwork: Effectively contribute and add value to cross functional initiatives. Seek to learn from other areas within the site to improve analytic approaches for the team.\nCompliance: Appropriately assess risk when business decisions are made, demonstrating consideration for the firm's reputation and safeguarding Citigroup, its clients, and assets, by driving compliance with applicable laws, rules and regulations, adhering to Policy, applying sound ethical judgment regarding personal behavior, conduct and business practices, and escalating, managing and reporting control issues with transparency.\nAnalytical Skills : Must Have\nBasic Statistics and Probability\nGood Logical / Analytical / Quantitative /Reasoning",
+            "About CITI\nCiti's mission is to serve as a trusted partner to our clients by responsibly providing financial services that enable growth and economic progress. We have 200+ years of experience helping our clients meet the world's toughest challenges and embrace its greatest opportunities.\nAbout AIM: \nAnalytics and Information Management(AIM) is a global community that is driving data driven transformation across Citi in multiple functions with the objective to create actionable intelligence for our business leaders. We are a fast growing organization working with Citi businesses and functions across the world. \nExcited to grow your career?\nWe value our talented employees, and whenever possible strive to help one of our associates grow professionally before recruiting new talent to our open positions. If you think the open position you see is right for you, we encourage you to apply!\nOur people make all the difference in our success.\nJob Description",
+            "Our people make all the difference in our success.\nJob Description\nThe Spec Analytics Analyst is a trainee professional role. Requires a good knowledge of the range of processes, procedures and systems to be used in carrying out assigned tasks and a basic understanding of the underlying concepts and principles upon which the job is based. Good understanding of how the team interacts with others in accomplishing the objectives of the area. Makes evaluative judgements based on the analysis of factual information. They are expected to resolve problems by identifying and selecting solutions through the application of acquired technical experience and will be guided by precedents. Must be able to exchange information in a concise way as well as be sensitive to audience diversity. Limited but direct impact on the business through the quality of the tasks/services provided. Impact of the job holder is restricted to own job.\nWhat\u2019s expected from you?\nAs an Analyst, we are seeking an experienced analytics candidate who should be able to perform below behaviors in their day-to-day role: \u00a0\nData Manipulation: Incumbents work with large and complex data sets (both internal and external data) to evaluate, recommend, and support the implementation of business strategies\nFamiliarity with Tools: Identifies and compiles data sets using a variety of tools (e.g. SQL, Access) to help predict, improve, and measure the success of key business to business outcomes",
+            "Qualifications:\nPrevious related experience preferred\nHave the ability to retrieve and manipulation data\nWorking experience in a quantitative field\nPossess analytic ability and problem solving skills\nExcellent communication and interpersonal skills, be organized, detail oriented, and adaptive to matrix work environment\n\nEducation:\nMasters /University degree or equivalent experience"
+          ],
+          "metadata": {}
+        }
+      ],
+      "metadata": {
+        "top_k": 5,
+        "in_domain_count": 4,
+        "off_topic_count": 0,
+        "abstained_count": 0
+      }
+    }
+  }
+}

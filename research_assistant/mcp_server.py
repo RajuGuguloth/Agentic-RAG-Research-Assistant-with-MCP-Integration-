@@ -9,7 +9,7 @@ Tools exposed:
     - search_papers(query, top_k)         → raw hybrid-retrieval hits (fast)
     - ask_paper(question)                 → full agentic answer with grounding + sources
     - index_status()                      → readiness + counts
-    - build_index_from_paths(paths)       → ingest PDFs, chunk, embed, persist
+    - build_index_from_paths(collection, paths) → replace one collection index
     - deep_read_paper(paper_url_or_path)  → structured report + PowerPoint
 
 Resources exposed:
@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import json
 import logging
+import mimetypes
 import os
 import sys
 import time
@@ -39,6 +40,7 @@ if str(ROOT) not in sys.path:
 
 from mcp.server.fastmcp import FastMCP
 import httpx
+from etl.document_loader import SUPPORTED_DOCUMENT_EXTENSIONS
 
 # ── Configure structured logging BEFORE importing anything that logs at import
 LOG_DIR = ROOT / "logs"
@@ -220,21 +222,30 @@ async def list_indexed_papers() -> Dict[str, Any]:
 # Tool 3: search_papers
 # ────────────────────────────────────────────────────────────────────────────
 @mcp.tool()
-async def search_papers(query: str, top_k: int = 6) -> Dict[str, Any]:
+async def search_papers(
+    collection: str,
+    query: str,
+    top_k: int = 6,
+) -> Dict[str, Any]:
     """
     Call the shared hybrid API and return top-K parent chunks with scores.
 
     Args:
+        collection: existing collection index to search
         query: user question or search string
         top_k: number of parent chunks to return (default 6)
     """
     t0 = time.time()
-    args = {"query": query, "top_k": top_k}
+    args = {"collection": collection, "query": query, "top_k": top_k}
     try:
         result = await _api_request(
             "POST",
             "/v1/search",
-            json_body={"query": query, "top_k": top_k},
+            json_body={
+                "collection": collection,
+                "query": query,
+                "top_k": top_k,
+            },
         )
         result["chunks"] = [
             {**chunk, "text": (chunk.get("text") or "")[:1500]}
@@ -287,37 +298,60 @@ async def ask_paper(question: str, user_id: str = "mcp-client") -> Dict[str, Any
 # ────────────────────────────────────────────────────────────────────────────
 @mcp.tool()
 async def build_index_from_paths(
-    pdf_paths: List[str],
+    collection: str,
+    file_paths: List[str],
     replace: bool = True,
     with_vision: bool = False,
 ) -> Dict[str, Any]:
     """
-    Ingest one or more local PDF files, chunk with parent-child + semantic
+    Ingest local PDF, HTML, TXT, DOCX, or PPTX files, chunk with parent-child + semantic
     splitting, build the FAISS + BM25 indexes, and persist to disk. The files
-    are uploaded to the shared RAG API, so they need only be readable here.
+    are sent to the shared local RAG API for on-device text extraction.
 
     Args:
-        pdf_paths: list of absolute paths to PDF files on the local filesystem
+        collection: collection ID to replace
+        file_paths: list of absolute paths to supported local document files
     """
     t0 = time.time()
-    args = {"pdf_paths": pdf_paths, "replace": replace, "with_vision": with_vision}
+    args = {
+        "collection": collection,
+        "file_paths": file_paths,
+        "replace": replace,
+        "with_vision": with_vision,
+    }
     try:
-        if not pdf_paths:
-            raise ValueError("At least one PDF path must be provided.")
+        if not file_paths:
+            raise ValueError("At least one document path must be provided.")
 
-        paths = [Path(path).expanduser() for path in pdf_paths]
-        missing = [str(path) for path in paths if not path.is_file() or path.suffix.lower() != ".pdf"]
+        paths = [Path(path).expanduser() for path in file_paths]
+        missing = [
+            str(path)
+            for path in paths
+            if not path.is_file()
+            or path.suffix.lower() not in SUPPORTED_DOCUMENT_EXTENSIONS
+        ]
         if missing:
-            raise FileNotFoundError(f"PDF paths not found: {missing[:3]}")
+            raise FileNotFoundError(f"Unsupported or missing document paths: {missing[:3]}")
         with ExitStack() as stack:
             multipart_files = [
-                ("files", (path.name, stack.enter_context(path.open("rb")), "application/pdf"))
+                (
+                    "files",
+                    (
+                        path.name,
+                        stack.enter_context(path.open("rb")),
+                        mimetypes.guess_type(path.name)[0] or "application/octet-stream",
+                    ),
+                )
                 for path in paths
             ]
             result = await _api_request(
                 "POST",
                 "/v1/upload",
-                data={"replace": str(replace).lower(), "with_vision": str(with_vision).lower()},
+                data={
+                    "collection": collection,
+                    "replace": str(replace).lower(),
+                    "with_vision": str(with_vision).lower(),
+                },
                 files=multipart_files,
             )
         _record_call("build_index_from_paths", args, result, (time.time() - t0) * 1000)
